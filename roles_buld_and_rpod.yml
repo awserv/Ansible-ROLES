@@ -1,0 +1,20 @@
+# подключаю два Volumes 
+# первый для ROLE work
+# второй для ROLE prod
+# чтобы 
+# запуск 'ansible-galaxy role.yml'
+
+---
+    - name: artifact creation
+      hosts: dev
+      become: yes
+    
+      roles:
+       - building_app
+    
+    - name: prod
+      hosts: prod
+      become: yes
+    
+      roles:
+       - prod

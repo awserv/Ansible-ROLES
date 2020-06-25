@@ -1,0 +1,3 @@
+---
+# defaults file for build
+dest_folder: /var/lib/tomcat8/webapps

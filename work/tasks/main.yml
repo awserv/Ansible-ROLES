@@ -1,0 +1,27 @@
+---
+# tasks file for building_app
+  - name: Run "apt-get update"
+
+  - name: install packages
+    apt:
+      pkg:
+      - default-jdk
+      - git
+      - maven
+
+  - name: Git clone project
+    git:
+      repo: 'https://github.com/boxfuse/boxfuse-sample-java-war-hello.git'
+      dest: /usr/boxfuse
+      clone: yes
+
+  - name: package Maven
+    shell:
+      cmd: mvn -f /tmp/boxfuse/pom.xml package
+      chdir: /tmp/boxfuse
+
+  - name: Synchronization of src on the inventory host to the dest on the localhost in pull mode
+    synchronize:
+      mode: pull
+      src: /usr/boxfuse/target/hello-1.0.war
+      dest: /usr/boxfuse/
